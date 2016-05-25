@@ -17,21 +17,27 @@ import 'rxjs/add/operator/catch';
         {{ hero.id }} - {{ hero.name }}
       </li>
     </ul>
+    {{errorMessage}}
     `
 })
 
 export class AppComponent {
   private heroesUrl = "http://hirokihara.github.io/testdata/heroes.json";
   private heroes = [];
-  errorMessage: string;
+  private errorMessage: string;
   
   constructor(private http: Http) {
+    // this.http.get(this.heroesUrl)
+    //   .map(this.extractData)
+    //   .catch(this.handleError)
+    //   .subscribe(
+    //     heroes => this.heroes = heroes,
+    //     error =>  this.errorMessage = <any>error
+    //   );
+      
     this.http.get(this.heroesUrl)
-      .map(this.extractData)
-      .catch(this.handleError)
       .subscribe(
-        heroes => this.heroes = heroes,
-        error =>  this.errorMessage = <any>error
+        result => this.heroes = result.json().data
       );
   }
 
