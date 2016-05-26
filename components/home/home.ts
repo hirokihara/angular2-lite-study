@@ -2,6 +2,8 @@ import {Component} from '@angular/core'
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+declare var MilkCocoa: any;
+
 // Statics
 import 'rxjs/add/observable/throw';
 
@@ -26,6 +28,8 @@ export class AppComponent {
   private heroes = [];
   private errorMessage: string;
   
+  // private milkcocoa = new MilkCocoa('postimpxymwi.mlkcca.com');
+  
   constructor(private http: Http) {
     // this.http.get(this.heroesUrl)
     //   .map(this.extractData)
@@ -38,7 +42,11 @@ export class AppComponent {
     this.http.get(this.heroesUrl)
       .subscribe(
         result => this.heroes = result.json().data
-      );
+      );  
+      
+      var milkcocoa = new MilkCocoa('postimpxymwi.mlkcca.com');
+      var ds = milkcocoa.dataStore('messages');
+      ds.push({title : 'hoge', content : 'huga'});
   }
 
   private extractData(res: Response) {
